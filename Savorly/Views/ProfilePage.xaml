@@ -1,0 +1,185 @@
+﻿<Page x:Class="Savorly.Views.ProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Savorly - Профіль" 
+      Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="White" Padding="30,20">
+            <StackPanel>
+                <Border Background="#FFE8D6" 
+                    Width="1495" 
+                    Height="80" 
+                    CornerRadius="40"
+                    BorderBrush="#FFD1B2" 
+                    BorderThickness="2">
+                    <TextBlock 
+                        FontSize="36" 
+                        FontWeight="Bold" 
+                        Foreground="#CC5500"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center" Width="158"><Run Text="Профіл"/><Run Language="uk-ua" Text="ь"/></TextBlock>
+                </Border>
+            </StackPanel>
+        </Border>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Background="White">
+                <Border x:Name="LoginSection" Background="White" Margin="30,0,30,20" 
+                        Padding="30" CornerRadius="12" BorderBrush="#E8E8E8" BorderThickness="1"
+                        Visibility="Visible">
+                    <StackPanel>
+                        <TextBlock Text="Увійдіть у свій акаунт" FontSize="20" FontWeight="SemiBold" 
+                                  Foreground="#333" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                        <Border Width="80" Height="80" Background="#FFE8D6" CornerRadius="40"
+                                HorizontalAlignment="Center" Margin="0,0,0,20">
+                            <TextBlock Text="👤" FontSize="32" 
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Button x:Name="LoginBtn" Content="Увійти" Background="#FFE8D6" Foreground="#CC5500" 
+                                FontSize="16" FontWeight="SemiBold" Height="50" BorderThickness="0" 
+                                Padding="20,0"
+                                Click="LoginBtn_Click" Width="862">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                            CornerRadius="8">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <Button Content="Зареєструватися" Background="White" Foreground="#CC5500"
+                                FontSize="16" FontWeight="SemiBold" Height="50" BorderThickness="2" 
+                                BorderBrush="#FFD1B2" Padding="20,0"
+                                Margin="0,15,0,0" Click="RegisterBtn_Click" Width="862">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="8">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <Border x:Name="ProfileSection" Background="White" Margin="30,0,30,20" 
+                        Visibility="Collapsed">
+                    <StackPanel>
+                        <Border Background="#FFF9F5" Padding="30" CornerRadius="12" BorderBrush="#FFE8D6" BorderThickness="1">
+                            <StackPanel>
+                                <Border Width="100" Height="100" Background="#FFE8D6" CornerRadius="50"
+                                        HorizontalAlignment="Center" Margin="0,0,0,20">
+                                    <TextBlock Text="👤" FontSize="40" 
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+
+                                <TextBlock x:Name="UserNameText" Text="Користувач" FontSize="24" FontWeight="Bold" 
+                                          Foreground="#333" HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="UserEmailText" Text="email@example.com" FontSize="14" 
+                                          Foreground="#666" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                                <Border Background="#FFF5E6" Padding="15,10" CornerRadius="8" Margin="0,15,0,0">
+                                    <TextBlock x:Name="UserStatsText" Text="0 рецептів створено" FontSize="14" 
+                                              FontWeight="SemiBold" Foreground="#CC5500" HorizontalAlignment="Center"/>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                        <StackPanel Margin="0,25,0,0">
+                            <Border Background="#FFE8D6" CornerRadius="8" Margin="0,0,0,12">
+                                <Button Content="➕ Створити новий рецепт" Background="Transparent" Foreground="#CC5500"
+                                        FontSize="16" FontWeight="SemiBold" Height="55" BorderThickness="0"
+                                        Padding="20,0" Click="CreateRecipeBtn_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    CornerRadius="8">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </Border>
+                            <Border Background="#FFF0E6" CornerRadius="8" Margin="0,0,0,12">
+                                <Button Content="📖 Мої рецепти" Background="Transparent" Foreground="#CC5500"
+                                        FontSize="16" FontWeight="SemiBold" Height="55" BorderThickness="0"
+                                        Padding="20,0" Click="MyRecipesBtn_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    CornerRadius="8">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </Border>
+                            <Border Background="#FFECE6" CornerRadius="8" Margin="0,0,0,12">
+                                <Button Content="❤️ Мої закладки" Background="Transparent" Foreground="#CC5500"
+                                        FontSize="16" FontWeight="SemiBold" Height="55" BorderThickness="0"
+                                        Padding="20,0" Click="MyFavoritesBtn_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    CornerRadius="8">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </Border>
+                            <Border Background="#E6F3FF" CornerRadius="8" Margin="0,0,0,12">
+                                <Button Content="📝 Записник" Background="Transparent" Foreground="#0066CC"
+                                        FontSize="16" FontWeight="SemiBold" Height="55" BorderThickness="0"
+                                        Padding="20,0" Click="NotebookBtn_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    CornerRadius="8">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </Border>
+
+                            <Border Background="White" CornerRadius="8" BorderBrush="#E8E8E8" BorderThickness="1">
+                                <Button Content="🚪 Вийти" Background="Transparent" Foreground="#666"
+                                        FontSize="16" FontWeight="SemiBold" Height="50" BorderThickness="0"
+                                        Padding="20,0" Click="LogoutBtn_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    CornerRadius="8">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </Border>
+                        </StackPanel>
+
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#FFF9F5" Margin="30,20" Padding="25" CornerRadius="12" 
+                        BorderBrush="#FFE8D6" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="💡 Порада" FontSize="18" FontWeight="SemiBold" 
+                                  Foreground="#333" Margin="0,0,0,10"/>
+                        <TextBlock Text="Створюйте власні рецепти, додавайте улюблені до закладок та діліться ними з іншими!"
+                                  FontSize="14" Foreground="#666" TextWrapping="Wrap" LineHeight="20"/>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</Page>

@@ -1,0 +1,261 @@
+﻿<Page x:Class="Savorly.Views.FoodPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Savorly - Страви" 
+      Background="White">
+
+    <Page.Resources>
+        <Style x:Key="FavoriteHeartStyle" TargetType="Border">
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Margin" Value="15,15,15,0"/>
+            <Setter Property="Background" Value="White"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsFavorite}" Value="True">
+                    <Setter Property="Background" Value="#CC5500"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="FavoriteIconStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Text" Value="🤍"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsFavorite}" Value="True">
+                    <Setter Property="Text" Value="❤️"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="White" Padding="20,15">
+            <StackPanel HorizontalAlignment="Center">
+
+                <Border Background="#FFE8D6" 
+                        Width="1500" 
+                        Height="80" 
+                        CornerRadius="40"
+                        BorderBrush="#CC5500" 
+                        BorderThickness="2"
+                        HorizontalAlignment="Center">
+                    <TextBlock Text="Savorli" 
+                               FontSize="36" 
+                               FontWeight="Bold" 
+                               Foreground="#CC5500"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
+
+                <TextBlock Text="кулінарні рецепти" 
+                           FontSize="20" 
+                           FontWeight="Bold"
+                           Foreground="#666" 
+                           HorizontalAlignment="Center"
+                           Margin="0,10,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Background="White" Padding="15,10" BorderBrush="#E8E8E8" BorderThickness="0,1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" 
+                        Content="‹" 
+                        FontSize="20" 
+                        FontWeight="Bold"
+                        Background="White"
+                        Foreground="#CC5500"
+                        BorderThickness="0"
+                        Width="40"
+                        Height="40"
+                        VerticalAlignment="Center"
+                        Click="ScrollLeft_Click"/>
+
+                <ScrollViewer Grid.Column="1" 
+                              HorizontalScrollBarVisibility="Hidden" 
+                              VerticalScrollBarVisibility="Disabled"
+                              x:Name="CategoriesScrollViewer">
+                    <StackPanel Orientation="Horizontal" x:Name="CategoriesPanel">
+                        <Border Background="#CC5500" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#усі" FontSize="14" Foreground="White" FontWeight="SemiBold"/>
+                        </Border>
+                        <Border Background="#F0F0F0" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#сніданок" FontSize="14" Foreground="#333"/>
+                        </Border>
+                        <Border Background="#F0F0F0" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#обід" FontSize="14" Foreground="#333"/>
+                        </Border>
+                        <Border Background="#F0F0F0" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#вечеря" FontSize="14" Foreground="#333"/>
+                        </Border>
+                        <Border Background="#F0F0F0" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#десерт" FontSize="14" Foreground="#333"/>
+                        </Border>
+                        <Border Background="#F0F0F0" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#швидко" FontSize="14" Foreground="#333"/>
+                        </Border>
+                        <Border Background="#F0F0F0" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#здорове" FontSize="14" Foreground="#333"/>
+                        </Border>
+                        <Border Background="#F0F0F0" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#вегетаріанське" FontSize="14" Foreground="#333"/>
+                        </Border>
+                        <Border Background="#F0F0F0" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#м'ясо" FontSize="14" Foreground="#333"/>
+                        </Border>
+                        <Border Background="#F0F0F0" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#риба" FontSize="14" Foreground="#333"/>
+                        </Border>
+                        <Border Background="#F0F0F0" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#салати" FontSize="14" Foreground="#333"/>
+                        </Border>
+                        <Border Background="#F0F0F0" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#супи" FontSize="14" Foreground="#333"/>
+                        </Border>
+                        <Border Background="#F0F0F0" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#випічка" FontSize="14" Foreground="#333"/>
+                        </Border>
+                        <Border Background="#F0F0F0" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#паста" FontSize="14" Foreground="#333"/>
+                        </Border>
+                        <Border Background="#F0F0F0" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#гриль" FontSize="14" Foreground="#333"/>
+                        </Border>
+                        <Border Background="#F0F0F0" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#дитяче" FontSize="14" Foreground="#333"/>
+                        </Border>
+                        <Border Background="#F0F0F0" Padding="15,8" Margin="5,0" CornerRadius="20">
+                            <TextBlock Text="#свята" FontSize="14" Foreground="#333"/>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Button Grid.Column="2" 
+                        Content="›" 
+                        FontSize="20" 
+                        FontWeight="Bold"
+                        Background="White"
+                        Foreground="#CC5500"
+                        BorderThickness="0"
+                        Width="40"
+                        Height="40"
+                        VerticalAlignment="Center"
+                        Click="ScrollRight_Click"/>
+            </Grid>
+        </Border>
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="RecipesItemsControl" Margin="20,15">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3" HorizontalAlignment="Stretch"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="280" Height="380" Background="White" Margin="10,10" 
+                                BorderBrush="#E8E8E8" BorderThickness="1" CornerRadius="12"
+                                MouseLeftButtonDown="RecipeCard_Click">
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="3" Opacity="0.1" BlurRadius="12"/>
+                            </Border.Effect>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="140"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Border Grid.Row="0" Background="#FFF9F5" CornerRadius="12,12,0,0">
+                                    <Grid>
+                                        <Image Source="{Binding ImagePath}" 
+                                               Stretch="UniformToFill" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               Height="140"/>
+
+                                        <Border Style="{StaticResource FavoriteHeartStyle}"
+                                                MouseLeftButtonDown="FavoriteButton_Click">
+                                            <TextBlock Style="{StaticResource FavoriteIconStyle}"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <StackPanel Grid.Row="1" Margin="15,12">
+                                    <TextBlock Text="{Binding Title}" 
+                                               FontWeight="SemiBold" 
+                                               FontSize="15" 
+                                               Foreground="#333" 
+                                               TextWrapping="Wrap" 
+                                               MaxHeight="40"
+                                               LineHeight="20"/>
+
+                                    <TextBlock Text="{Binding ShortDescription}" 
+                                               FontSize="12" 
+                                               Foreground="#666" 
+                                               Margin="0,4,0,0"
+                                               TextWrapping="Wrap"
+                                               MaxHeight="36"
+                                               LineHeight="16"/>
+
+                                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="🕒" FontSize="11" VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding PreparationTime}" FontSize="11" 
+                                                       Margin="4,0,0,0" VerticalAlignment="Center" FontWeight="Medium"/>
+                                            <TextBlock Text="хв" FontSize="10" Margin="2,0,12,0" 
+                                                       VerticalAlignment="Center" Foreground="#666"/>
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="👥" FontSize="11" VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Servings}" FontSize="11" 
+                                                       Margin="4,0,0,0" VerticalAlignment="Center" FontWeight="Medium"/>
+                                            <TextBlock Text="порц" FontSize="10" Margin="2,0,0,0" 
+                                                       VerticalAlignment="Center" Foreground="#666"/>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <TextBlock Text="{Binding TagsDisplay}" 
+                                               FontSize="11" 
+                                               Foreground="#CC5500" 
+                                               Margin="0,6,0,0"
+                                               TextWrapping="Wrap"/>
+                                </StackPanel>
+
+                                <Border Grid.Row="2" Background="#CC5500" 
+                                        CornerRadius="0,0,12,12" 
+                                        Height="40">
+                                    <TextBlock Text="Детальніше" 
+                                               FontSize="13" 
+                                               FontWeight="SemiBold" 
+                                               Foreground="White"
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Page>

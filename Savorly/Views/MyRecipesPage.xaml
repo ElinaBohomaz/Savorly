@@ -1,0 +1,196 @@
+﻿<Page x:Class="Savorly.Views.MyRecipesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Мої рецепти - Savorly" 
+      Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="White" Padding="30,20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" 
+                        Content="‹" 
+                        FontSize="24" 
+                        FontWeight="Bold"
+                        Background="Transparent"
+                        Foreground="#CC5500"
+                        BorderThickness="0"
+                        Width="50"
+                        Height="50"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Click="BackButton_Click"
+                        ToolTip="Повернутися до профілю">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FFF5E6"/>
+                                    <Setter Property="Foreground" Value="#FF6B00"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                    <Border Background="#FFE8D6" 
+                            Width="400" 
+                            Height="60" 
+                            CornerRadius="30"
+                            BorderBrush="#CC5500" 
+                            BorderThickness="2">
+                        <TextBlock Text="Мої рецепти" 
+                                   FontSize="24" 
+                                   FontWeight="Bold" 
+                                   Foreground="#CC5500"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Border>
+                    <TextBlock Text="Рецепти, створені вами" 
+                               FontSize="16" 
+                               Foreground="#666" 
+                               Margin="0,8,0,0"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <ItemsControl x:Name="MyRecipesItemsControl" Margin="30,0,30,30">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="White" Margin="0,0,0,15" 
+                                    BorderBrush="#E8E8E8" BorderThickness="1" 
+                                    CornerRadius="12" Padding="0">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="2" Opacity="0.08" BlurRadius="8"/>
+                                </Border.Effect>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="20,15">
+                                        <TextBlock Text="{Binding Title}" FontSize="18" FontWeight="SemiBold" 
+                                                  Foreground="#333" TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding Description}" FontSize="14" 
+                                                  Foreground="#666" Margin="0,8,0,0" TextWrapping="Wrap"
+                                                  LineHeight="18" MaxHeight="36" TextTrimming="CharacterEllipsis"/>
+
+                                        <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                                            <Border Background="#FFF5E6" Padding="8,4" CornerRadius="6" Margin="0,0,10,0">
+                                                <TextBlock Text="{Binding Type}" FontSize="12" FontWeight="SemiBold" 
+                                                          Foreground="#CC5500"/>
+                                            </Border>
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,15,0">
+                                                <TextBlock Text="🕒" FontSize="11" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding PreparationTime, StringFormat=' {0}'}" 
+                                                          FontSize="11" FontWeight="Medium"
+                                                          VerticalAlignment="Center" Margin="2,0,0,0"/>
+                                                <TextBlock Text="хв" FontSize="10" Margin="2,0,0,0" 
+                                                          VerticalAlignment="Center" Foreground="#666"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="👥" FontSize="11" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Servings, StringFormat=' {0}'}" 
+                                                          FontSize="11" FontWeight="Medium"
+                                                          VerticalAlignment="Center" Margin="2,0,0,0"/>
+                                                <TextBlock Text="порц" FontSize="10" Margin="2,0,0,0" 
+                                                          VerticalAlignment="Center" Foreground="#666"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" 
+                                                VerticalAlignment="Top" Margin="0,15,15,0">
+                                        <Button Content="👁️" FontSize="12" Background="Transparent" 
+                                                BorderThickness="0" Margin="0,0,8,0" Width="36" Height="36"
+                                                Click="ViewRecipeButton_Click"
+                                                ToolTip="Переглянути">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Cursor" Value="Hand"/>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#F0F8FF"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                        <Button Content="✏️" FontSize="14" Background="Transparent" 
+                                                BorderThickness="0" Margin="0,0,8,0" Width="36" Height="36"
+                                                Click="EditButton_Click"
+                                                ToolTip="Редагувати">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Cursor" Value="Hand"/>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#FFF9F5"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                        <Button Content="🗑️" FontSize="14" Background="Transparent" 
+                                                BorderThickness="0" Width="36" Height="36"
+                                                Click="DeleteButton_Click"
+                                                ToolTip="Видалити">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Cursor" Value="Hand"/>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#FFF0F0"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <Border x:Name="NoRecipesMessage" Visibility="Collapsed" 
+                        Background="White" Margin="30" Padding="40">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="📝" FontSize="64" HorizontalAlignment="Center" Foreground="#CCC"/>
+                        <TextBlock Text="У вас ще немає рецептів" FontSize="20" FontWeight="SemiBold" 
+                                  Foreground="#666" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+                        <TextBlock Text="Створіть свій перший рецепт!" FontSize="14" 
+                                  Foreground="#999" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                        <Button Content="➕ Створити рецепт" Background="#FFE8D6" Foreground="#CC5500"
+                                FontSize="14" FontWeight="SemiBold" BorderThickness="0" 
+                                Height="40" Padding="20,0" Margin="0,20,0,0"
+                                Click="CreateRecipeButton_Click">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                            CornerRadius="8">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

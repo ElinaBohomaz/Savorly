@@ -1,0 +1,187 @@
+﻿<Page x:Class="Savorly.Views.FavoritesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Savorly - Обране" 
+      Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="White" Padding="30,20">
+            <StackPanel>
+                <Border Background="#FFE8D6" 
+                    Width="1500" 
+                    Height="80" 
+                    CornerRadius="40"
+                    BorderBrush="#CC5500" 
+                    BorderThickness="2">
+                    <TextBlock 
+                        FontSize="36" 
+                        FontWeight="Bold" 
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                        <Run Foreground="#CC5500" FontSize="28" Text="Обране"/>
+                    </TextBlock>
+                </Border>
+                <TextBlock FontSize="16" Foreground="#666" Text="Ваші улюблені рецепти" 
+                           FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Background="White" Padding="30,0,30,20">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <RadioButton x:Name="AllFavoritesRadio" Content="Усі обране" GroupName="FavoritesFilter" 
+                               IsChecked="True" Checked="FavoritesFilter_Checked" 
+                               FontSize="14" Margin="0,0,20,0"/>
+                    <RadioButton x:Name="FoodFavoritesRadio" Content="🍳 Страви" GroupName="FavoritesFilter" 
+                               Checked="FavoritesFilter_Checked" FontSize="14" Margin="0,0,20,0"/>
+                    <RadioButton x:Name="DrinkFavoritesRadio" Content="🥤 Напої" GroupName="FavoritesFilter" 
+                               Checked="FavoritesFilter_Checked" FontSize="14"/>
+                </StackPanel>
+
+                <TextBlock x:Name="FavoritesCountText" Text="Завантаження..." FontSize="14" Foreground="#666" 
+                          HorizontalAlignment="Center" Margin="0,12,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <ItemsControl x:Name="FavoritesItemsControl" Margin="30,0,30,30">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Width="320" Height="380" Background="White" Margin="15,15" 
+                                    BorderBrush="#E8E8E8" BorderThickness="1" CornerRadius="12"
+                                    MouseLeftButtonDown="RecipeCard_Click">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="3" Opacity="0.1" BlurRadius="12"/>
+                                </Border.Effect>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="160"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Border Grid.Row="0" Background="#FFF9F5" CornerRadius="12,12,0,0">
+                                        <Grid>
+                                            <Image Source="{Binding ImagePath}" 
+                                                   Stretch="UniformToFill" 
+                                                   HorizontalAlignment="Center" 
+                                                   VerticalAlignment="Center"
+                                                   Height="140">
+                                                <Image.Style>
+                                                    <Style TargetType="Image">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding ImagePath}" Value="{x:Null}">
+                                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding ImagePath}" Value="">
+                                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
+                                            <Border Background="#CC5500" Width="36" Height="36" CornerRadius="18"
+                                                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                                                    Margin="15,15,15,0">
+                                                <TextBlock Text="❤️" FontSize="16" 
+                                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+
+                                    <StackPanel Grid.Row="1" Margin="20,15">
+                                        <TextBlock Text="{Binding Title}" 
+                                                   FontWeight="SemiBold" 
+                                                   FontSize="16" 
+                                                   Foreground="#333" 
+                                                   TextWrapping="Wrap" 
+                                                   MaxHeight="45"
+                                                   LineHeight="20"/>
+
+                                        <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="🕒" FontSize="12" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding PreparationTime}" FontSize="12" 
+                                                           Margin="6,0,0,0" VerticalAlignment="Center" FontWeight="Medium"/>
+                                                <TextBlock Text="хв" FontSize="11" Margin="2,0,15,0" 
+                                                           VerticalAlignment="Center" Foreground="#666"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="👥" FontSize="12" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Servings}" FontSize="12" 
+                                                           Margin="6,0,0,0" VerticalAlignment="Center" FontWeight="Medium"/>
+                                                <TextBlock Text="порц" FontSize="11" Margin="2,0,0,0" 
+                                                           VerticalAlignment="Center" Foreground="#666"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <TextBlock Text="{Binding Tags}" 
+                                                   FontSize="12" 
+                                                   Foreground="#CC5500" 
+                                                   Margin="0,8,0,0"
+                                                   TextWrapping="Wrap"/>
+                                    </StackPanel>
+
+                                    <Border Grid.Row="2" Background="#FFF5E6" 
+                                            CornerRadius="0,0,12,12" 
+                                            Height="45">
+                                        <Button Background="Transparent" 
+                                                BorderThickness="0" 
+                                                HorizontalAlignment="Center"
+                                                Click="RemoveFavoriteButton_Click">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="💔" FontSize="14" Foreground="#CC5500" Margin="0,0,8,0"/>
+                                                <TextBlock Text="Видалити з обраного" FontSize="14" 
+                                                           FontWeight="SemiBold" Foreground="#CC5500"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <Border x:Name="NoFavoritesMessage" Visibility="Collapsed" 
+                        Background="White" Margin="30" Padding="40">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="🤍" FontSize="64" HorizontalAlignment="Center" Foreground="#CCC"/>
+                        <TextBlock Text="Немає обраних рецептів" FontSize="20" FontWeight="SemiBold" 
+                                  Foreground="#666" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+                        <TextBlock Text="Додавайте рецепти до обраного, натискаючи ❤️" FontSize="14" 
+                                  Foreground="#999" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                        <Button Content="Перейти до рецептів" Background="#CC5500" Foreground="White"
+                                FontSize="14" FontWeight="SemiBold" BorderThickness="0" 
+                                Height="40" Padding="20,0" Margin="0,20,0,0"
+                                Click="GoToRecipesButton_Click">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                            CornerRadius="8">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
