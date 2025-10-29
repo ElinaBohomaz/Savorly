@@ -50,7 +50,7 @@
                         BorderBrush="#CC5500" 
                         BorderThickness="2"
                         HorizontalAlignment="Center">
-                    <TextBlock Text="Savorli" 
+                    <TextBlock Text="Savorly" 
                                FontSize="36" 
                                FontWeight="Bold" 
                                Foreground="#CC5500"

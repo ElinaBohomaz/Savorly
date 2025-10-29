@@ -12,7 +12,7 @@ namespace Savorly.Migrations
             migrationBuilder.CreateTable(
                 name: "Tags",
                 columns: table => new
-                {іві
+                {
                     TagId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false)
